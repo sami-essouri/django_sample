@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<!-- Output table -->
+
+<table id="myTable">
+
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>is_admin</th>
+            {% if active_user.is_admin %}
+            <th>Location</th>
+            <th>Action</th>
+            {% endif %}
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.is_admin }}</td>
+            {% if active_user.is_admin %}
+            <td>{{ user.location }}</td>
+            <td><a href="{% url 'delete' pk=user.id %}">delete</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+{% endblock %}
